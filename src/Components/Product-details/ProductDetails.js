@@ -1,5 +1,3 @@
-// ProductDetails.js
-
 import React, { useState, useEffect } from 'react';
 import './ProductDetails.css';
 import CommentBox from '../../Comment-box/Comment-box';
@@ -9,10 +7,16 @@ import LiveRating from '../LiveRating/LiveRating';
 function ProductDetails(props) {
   const [data, setData] = useState({});
   const [formSubmitted, setFormSubmitted] = useState(false); // Track form submission
+  const [showLoading, setShowLoading] = useState(true); // Track loading display
   const itemId = window.location.pathname.split('/').pop();
 
   useEffect(() => {
     if (itemId) {
+      // Simulate loading by showing loading state for 2 seconds
+      setTimeout(() => {
+        setShowLoading(false);
+      }, 500);
+
       fetch(`/api/${props.product}/${itemId}`)
         .then((response) => {
           if (!response.ok) {
@@ -60,51 +64,57 @@ function ProductDetails(props) {
 
   return (
     <div>
-      <div className="container">
-        <div className="container-one">
-          <div>
-            <img id="product-logo" className="product-logo" alt="product-logo" src={link} />
-          </div>
-          {bool ? (
-            <div></div>
-          ) : (
-            <div className="button-div">
-              <div className="add-to-cart-button">
-                <form id="form" method="post" action={setCurrentURL}>
-                  <button className="add-to-cart" onClick={addToCart}>
-                    ADD TO CART
-                  </button>
-                </form>
-              </div>
-              <div className="buy-button">
-                <form action="/buy" method="post" onSubmit={setCurrentURL}>
-                  <button className="buy-now" type="submit">
-                    BUY NOW
-                  </button>
-                </form>
-              </div>
-            </div>
-          )}
+      {showLoading ? (
+        <div className='loading-page'>
+          <img src='https://i.gifer.com/origin/b4/b4d657e7ef262b88eb5f7ac021edda87.gif' alt="Loading" />
         </div>
-        <div className="container-two">
-          <div>
+      ) : (
+        <div className="container">
+          <div className="container-one">
             <div>
-              {stock}
-              <h1 id="product-name">{name}</h1>
-              <p id="product-size">{size}</p>
-              <p id="product-display">{display}</p>
-              <p>
-                Price: <i className="fa-sharp fa-solid fa-indian-rupee-sign" style={{ color: '#000000' }}></i>
-                <span id="product-price">{price}</span>
-              </p>
-              <LiveRating product={_id}></LiveRating>
+              <img id="product-logo" className="product-logo" alt="product-logo" src={link} />
+            </div>
+            {bool ? (
+              <div></div>
+            ) : (
+              <div className="button-div">
+                <div className="add-to-cart-button">
+                  <form id="form" method="post" action={setCurrentURL}>
+                    <button className="add-to-cart" onClick={addToCart}>
+                      ADD TO CART
+                    </button>
+                  </form>
+                </div>
+                <div className="buy-button">
+                  <form action="/buy" method="post" onSubmit={setCurrentURL}>
+                    <button className="buy-now" type="submit">
+                      BUY NOW
+                    </button>
+                  </form>
+                </div>
+              </div>
+            )}
+          </div>
+          <div className="container-two">
+            <div>
+              <div>
+                {stock}
+                <h1 id="product-name">{name}</h1>
+                <p id="product-size">{size}</p>
+                <p id="product-display">{display}</p>
+                <p>
+                  Price: <i className="fa-sharp fa-solid fa-indian-rupee-sign" style={{ color: '#000000' }}></i>
+                  <span id="product-price">{price}</span>
+                </p>
+                <LiveRating product={_id}></LiveRating>
+              </div>
             </div>
           </div>
         </div>
-      </div>
-      
+      )}
+
       {/* Conditionally render CommentBox based on formSubmitted and alreadyComment */}
-      {!formSubmitted && !alreadyComment && (
+      {!showLoading && !formSubmitted && !alreadyComment && (
         <CommentBox onFormSubmit={() => setFormSubmitted(true)} product_id={_id} />
       )}
 

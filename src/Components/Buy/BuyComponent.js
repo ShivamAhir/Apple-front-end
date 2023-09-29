@@ -1,5 +1,6 @@
 import React from 'react';
 import './BuyComponent.css';
+import LiveRating from '../LiveRating/LiveRating';
 
 function BuyComponent(props) {
   const handleDelete = () => {
@@ -30,6 +31,7 @@ function BuyComponent(props) {
         </div>
         <div id="product-description">
           <p>In stock</p>
+          <LiveRating product={props.product}></LiveRating>
           <p>{props.name}</p>
           <p>{props.size}</p>
           <p>{props.display}</p>

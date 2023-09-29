@@ -9,6 +9,7 @@ class Buy extends Component {
     super();
     this.state = {
       data: null,
+      isLoading: true, // Add isLoading state
     };
   }
 
@@ -31,6 +32,11 @@ class Buy extends Component {
     this.intervalId = setInterval(() => {
       this.fetchData();
     }, 5000); // Fetch data every 5 seconds
+
+    // Set isLoading to true initially, then after 0.5 seconds, set it to false
+    setTimeout(() => {
+      this.setState({ isLoading: false });
+    }, 500);
   }
 
   componentWillUnmount() {
@@ -39,7 +45,16 @@ class Buy extends Component {
   }
 
   render() {
-    const { data } = this.state;
+    const { data, isLoading } = this.state;
+
+    if (isLoading) {
+      // Render the loading animation for 0.5 seconds
+      return (
+        <div className='loading-page'>
+          <img src='https://i.gifer.com/origin/b4/b4d657e7ef262b88eb5f7ac021edda87.gif' alt='Loading' />
+        </div>
+      );
+    }
 
     if (data === null) {
       // Render a loading state or return null if you prefer
@@ -48,7 +63,7 @@ class Buy extends Component {
 
     // Check if data is an array before mapping over it
     if (!Array.isArray(data)) {
-      return  <EmptyCart></EmptyCart>;
+      return <EmptyCart></EmptyCart>;
     }
 
     const priceArr = [];
@@ -87,6 +102,7 @@ class Buy extends Component {
                     link={item.link}
                     product_id={item._id}
                     fetchData={this.fetchData} // Pass the fetchData function
+                    product={item.Product_id}
                   />
                 </div>
               ))}

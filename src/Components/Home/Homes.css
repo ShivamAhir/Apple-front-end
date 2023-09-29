@@ -84,6 +84,7 @@ Variables
   }
   h1 {
     font-size: 3rem;
+
   }
   h2 {
     font-size: 2rem;
@@ -127,7 +128,7 @@ Variables
   .section {
     width: 80vw;
     margin: 5rem auto;
-    height: 62vh;
+    height: 75vh;
   }
   
   @media screen and (min-width: 992px) {
@@ -164,7 +165,7 @@ Variables
   }
   article h1 {
     text-transform: uppercase;
-    color: var(--clr-primary-5);
+    color: black;
     margin-bottom: 0.25rem;
     margin-top: 50px;
   }
@@ -188,7 +189,8 @@ Variables
   }
   .prev:hover,
   .next:hover {
-    background: var(--clr-primary-5);
+    background: black;
+    visibility: visible; /* Make the button visible on hover */
   }
   .prev {
     left: 0;
@@ -202,11 +204,18 @@ Variables
     }
     .prev,
     .next {
-      width: 2rem;
-      height: 2rem;
+      margin-top: 60px;
+      width: 3rem;
+      height: 6rem;
       font-size: 1.5rem;
+      background-color: transparent;
+      transition: visibility 0.3s ease; 
     }
+
   }
+  /* .next-button{
+    
+  } */
   article {
     position: absolute;
     top: 0;
@@ -226,4 +235,9 @@ Variables
   article.nextSlide {
     transform: translateX(100%);
   }
-  
+  .loading-page{
+    height: 800px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

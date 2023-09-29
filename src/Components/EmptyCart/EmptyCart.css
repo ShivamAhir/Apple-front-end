@@ -6,3 +6,9 @@
 .cartmessage{
     color: red;
 }
+.loading-page{
+    height: 800px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

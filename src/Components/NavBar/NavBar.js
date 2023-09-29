@@ -2,8 +2,8 @@ import { Link } from "react-router-dom";
 import React, { useState, useEffect } from "react";
 import './NavBar.css';
 import NavBarOption from "./NavBarOption";
-import LogSign from "../LogSign/LogSign";
 import User from "../UserName/User";
+import Login from '../LogSign/Login'
 
 function NavBar() {
   const [sseData, setSseData] = useState({ UserName: '', UserEmail: '' });
@@ -25,7 +25,7 @@ function NavBar() {
   return (
     <div className="navbar-parent">
       <div className="navbar">
-        <Link to="/"><NavBarOption type="home"></NavBarOption></Link>
+        <Link to="/"><NavBarOption type="home" ></NavBarOption></Link>
         <Link to="/imac"><NavBarOption type='iMac'></NavBarOption></Link>
         <Link to="/ipad"><NavBarOption type='iPad'></NavBarOption></Link>
         <Link to="/iphone"><NavBarOption type='iPhone'></NavBarOption></Link>
@@ -34,12 +34,9 @@ function NavBar() {
         <Link to="/support"><NavBarOption type='Support'></NavBarOption></Link>
         <Link to="/buy"><NavBarOption type='buy'></NavBarOption></Link>
       </div>
-      <User userName={sseData.UserName}></User>
-      {isLoggedIn ? (
-        <Link to="/login" className='login-page'><LogSign logIn="true"></LogSign></Link>
-      ) : (
-        <Link to="/login" className='login-page'><LogSign logIn="false"></LogSign></Link>
-      )}
+      {sseData.UserName !== "" && <User userName={sseData.UserName}></User>}
+      {sseData.UserName === "" && <Login userName={sseData.UserName}></Login>}
+      
     </div>
   );
 }

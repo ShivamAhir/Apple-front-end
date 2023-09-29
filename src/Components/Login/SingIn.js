@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
-import './SingIn.css';
 
+import './SignIn.css';
 
 class SignIn extends Component {
+
   constructor() {
     super();
     this.state = {
@@ -15,10 +16,10 @@ class SignIn extends Component {
       isSignUpFormVisible: false,
     };
   }
-  navigateHome = () => {
-    const { history } = this.props;
-    history.push('/');
-  };
+
+  // const navigateHome = () => {
+  //   history.push('/'); // Navigate to the home page
+  // };
 
   handleInputChange = (event) => {
     const { name, value } = event.target;
@@ -42,8 +43,14 @@ class SignIn extends Component {
         },
         body: JSON.stringify(requestBody),
       });
+
       // Handle response and redirect if needed
-      
+      // if (response.status === 200) {
+      //   this.navigateHome(); // Use 'this.navigateHome()'
+      // } else {
+      //   // Handle error
+      //   console.error('Error:', response.statusText);
+      // }
     } catch (error) {
       console.error('Error:', error);
     }
@@ -67,14 +74,12 @@ class SignIn extends Component {
         body: JSON.stringify(requestBody),
       });
 
+      // Check for success and navigate if needed
       if (response.status === 200) {
-        // Login successful
-        // You can add further handling here if needed
-        this.navigateHome();
+        this.navigateHome(); // Use 'this.navigateHome()'
       } else {
-        // Login failed
-        // You can display an error message to the user
-        console.error('Login failed');
+        // Handle error
+        console.error('Error:', response.statusText);
       }
     } catch (error) {
       console.error('Error:', error);

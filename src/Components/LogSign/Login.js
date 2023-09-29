@@ -1,7 +1,9 @@
+import './login.css';
 function LogIn()
 {
     return (
-        <button className="Button">Login</button>
+        <a href="login"><button className="Button">Login</button></a>
+        
     )
 }
 export default LogIn;

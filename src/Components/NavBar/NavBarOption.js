@@ -2,7 +2,7 @@ import './NavBarOption.css'
 function NavBarOption(props)
 {
     return (
-        <button className="Button">{props.type}</button>
+        <button id="NavButton">{props.type}{props.children}</button>
     );
 }
 export default NavBarOption;

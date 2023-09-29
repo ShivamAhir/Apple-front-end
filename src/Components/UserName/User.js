@@ -1,3 +1,4 @@
+import LogOut from '../LogSign/LogOut';
 import './User.css';
 function User(props)
 {
@@ -5,7 +6,12 @@ function User(props)
     name=name.substring(0, name.indexOf(' '));
     
     return (
-        <button className='Button'>{name}</button>
+        <div class="dropdown">
+            <button class="dropbtn">{name}</button>
+            <div class="dropdown-content">
+                <a><LogOut></LogOut></a>
+            </div>
+       </div>
     )
 }
 export default User;

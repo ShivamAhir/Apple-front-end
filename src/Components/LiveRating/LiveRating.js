@@ -4,7 +4,7 @@ import './LiveRating.css';
 
 function LiveRating(props) {
   const [data, setData] = useState([]);
-
+  
   // Define fetchData as a useCallback
   const fetchData = useCallback(() => {
     fetch(`/api/RatingBox/${props.product}`)
@@ -25,7 +25,7 @@ function LiveRating(props) {
   // Fetch data when the component mounts and update the 'data' state
   useEffect(() => {
     fetchData();
-  }, [fetchData]); // Include fetchData as a dependency
+  }, [fetchData]);
 
   // Fetch data at regular intervals (e.g., every 5 seconds) and update the 'data' state
   useEffect(() => {
@@ -35,14 +35,14 @@ function LiveRating(props) {
 
     // Cleanup the interval on component unmount
     return () => clearInterval(intervalId);
-  }, [fetchData]); // Include fetchData as a dependency
+  }, [fetchData]);
 
   // Calculate the average rating
-  const averageRating = data.reduce((sum, item) => sum + (item.rating)*1, 0) / data.length;
+  const averageRating = data.reduce((sum, item) => sum + (item.rating) * 1, 0) / data.length;
 
   return (
     <ProductRating rating={averageRating}></ProductRating>
   );
 }
 
-export default LiveRating;
+export default React.memo(LiveRating);
