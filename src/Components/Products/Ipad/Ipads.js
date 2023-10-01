@@ -12,18 +12,20 @@ class Ipads extends Component {
   }
 
   componentDidMount() {
-    fetch('/api/ipad')
-      .then((response) => response.json()) 
-      .then((data) => {
-        this.setState({ data });
-      })
-      .catch((error) => {
-        console.error('Error fetching data:', error);
-      });
+    fetch('/api/ipad/') // Make sure to include the trailing slash to match your server endpoint
+    .then((response) => response.json())
+    .then((data) => {
+      this.setState({ data });
+    })
+    .catch((error) => {
+      console.error('Error fetching data:', error);
+    });
   }
+  
   
   render() {
     const { data } = this.state; 
+    console.log(data);
 
     return (
       <div className="main-div">

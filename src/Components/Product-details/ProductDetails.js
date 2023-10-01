@@ -3,13 +3,20 @@ import './ProductDetails.css';
 import CommentBox from '../../Comment-box/Comment-box';
 import OldComments from '../OldComments/OldComment';
 import LiveRating from '../LiveRating/LiveRating';
+import Alert  from '../Alert_message/Alert';
+import { useNavigate } from 'react-router-dom';
 
 function ProductDetails(props) {
   const [data, setData] = useState({});
   const [formSubmitted, setFormSubmitted] = useState(false); // Track form submission
   const [showLoading, setShowLoading] = useState(true); // Track loading display
+  const [showAlert, setShowAlert] = useState(false); // Track alert display
   const itemId = window.location.pathname.split('/').pop();
-
+  const navigate=useNavigate();
+  const buyFun = async(e) => {
+    addToCart(e);
+    navigate('/buy');
+  };
   useEffect(() => {
     if (itemId) {
       // Simulate loading by showing loading state for 2 seconds
@@ -48,6 +55,7 @@ function ProductDetails(props) {
       }
 
       // Handle success, if needed
+      setShowAlert(true); // Show the alert when the item is added to the cart
     } catch (error) {
       console.error('Error:', error);
       // Handle the error, e.g., display an error message to the user
@@ -87,7 +95,7 @@ function ProductDetails(props) {
                 </div>
                 <div className="buy-button">
                   <form action="/buy" method="post" onSubmit={setCurrentURL}>
-                    <button className="buy-now" type="submit">
+                    <button className="buy-now" type="submit" onClick={buyFun}>
                       BUY NOW
                     </button>
                   </form>
@@ -119,6 +127,11 @@ function ProductDetails(props) {
       )}
 
       <OldComments product={_id}></OldComments>
+
+      {/* Conditionally render the Alert component */}
+      {showAlert && (
+        <Alert message="Item added to cart!" />
+      )}
     </div>
   );
 }

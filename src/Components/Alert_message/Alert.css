@@ -1,0 +1,24 @@
+.popup-container {
+    position: fixed;
+    top: 20px; /* Adjust this value to position the pop-up vertically */
+    right: 20px; /* Adjust this value to position the pop-up horizontally */
+    display: none;
+}
+
+/* Style for the pop-up */
+.popup {
+    background-color: #fff; /* White background */
+    padding: 10px;
+    border: 1px solid #ccc;
+    position: relative;
+}
+
+/* Style for the timer bar */
+.timer-bar {
+    height: 5px;
+    background-color: #007bff; /* Blue color for the timer bar, you can change this */
+    width: 0%;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
